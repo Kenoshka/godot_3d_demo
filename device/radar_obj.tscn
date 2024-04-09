@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d04wp2olpmws3"]
+
+[ext_resource type="Texture2D" uid="uid://cwv18hsovdxsv" path="res://device/white-circle.png" id="1_115f5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ob2vj"]
+radius = 9.0
+
+[node name="radar_obj" type="Area2D"]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("1_115f5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ob2vj")

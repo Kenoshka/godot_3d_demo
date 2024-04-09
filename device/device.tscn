@@ -1,0 +1,138 @@
+[gd_scene load_steps=9 format=3 uid="uid://ckyt2saqkkonp"]
+
+[ext_resource type="Script" path="res://device/device.gd" id="1_ubnf5"]
+[ext_resource type="Texture2D" uid="uid://cwv18hsovdxsv" path="res://device/white-circle.png" id="2_tylk4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xt82m"]
+albedo_color = Color(0.168627, 0.168627, 0.168627, 1)
+metallic = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hge7l"]
+albedo_color = Color(0.835294, 0.0313726, 0.141176, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6svsc"]
+albedo_color = Color(1, 0.784314, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0gb6e"]
+albedo_color = Color(0.247059, 0.247059, 0.247059, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6ft34"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hn2ci"]
+size = Vector2(1.41423, 152.735)
+
+[node name="Device" type="CSGBox3D"]
+size = Vector3(0.3, 0.1, 0.5)
+material = SubResource("StandardMaterial3D_xt82m")
+script = ExtResource("1_ubnf5")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0670607, 0.0154867, 0.126758)
+radius = 0.05
+height = 0.1
+material = SubResource("StandardMaterial3D_hge7l")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.146208, 0.0004448, -0.159913)
+size = Vector3(0.05, 0.05, 0.075)
+material = SubResource("StandardMaterial3D_6svsc")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.146208, 0.0004448, -0.0511926)
+size = Vector3(0.05, 0.05, 0.075)
+material = SubResource("StandardMaterial3D_6svsc")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00641085, -0.0846304)
+radius = 0.13
+height = 0.1
+sides = 32
+material = SubResource("StandardMaterial3D_0gb6e")
+
+[node name="ScreenSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, -4.37114e-09, 0.1, 0, -0.1, -4.37114e-09, 0, 0.0565861, -0.0846304)
+texture = SubResource("ViewportTexture_6ft34")
+region_rect = Rect2(10, 0, 0, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visibility_layer = 2
+zoom = Vector2(0.8, 0.8)
+
+[node name="Drawings" type="Node2D" parent="Camera2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/Drawings"]
+modulate = Color(0.0352941, 0.345098, 0, 1)
+position = Vector2(7.62939e-06, -5.48363e-06)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_tylk4")
+
+[node name="Line2D" type="Line2D" parent="Camera2D/Drawings"]
+points = PackedVector2Array(150, 0, -150, 0)
+width = 5.0
+default_color = Color(1, 1, 1, 0.466667)
+
+[node name="Line2D" type="Line2D" parent="Camera2D/Drawings/Line2D"]
+points = PackedVector2Array(150, 50, -150, 50)
+width = 5.0
+default_color = Color(1, 1, 1, 0.117647)
+
+[node name="Line2D2" type="Line2D" parent="Camera2D/Drawings/Line2D"]
+points = PackedVector2Array(150, -50, -150, -50)
+width = 5.0
+default_color = Color(1, 1, 1, 0.117647)
+
+[node name="Line2D3" type="Line2D" parent="Camera2D/Drawings/Line2D"]
+points = PackedVector2Array(150, -100, -150, -100)
+width = 5.0
+default_color = Color(1, 1, 1, 0.117647)
+
+[node name="Line2D4" type="Line2D" parent="Camera2D/Drawings/Line2D"]
+points = PackedVector2Array(150, 100, -150, 100)
+width = 5.0
+default_color = Color(1, 1, 1, 0.117647)
+
+[node name="Line2D2" type="Line2D" parent="Camera2D/Drawings"]
+points = PackedVector2Array(0, 150, 0, -150)
+width = 5.0
+default_color = Color(1, 1, 1, 0.466667)
+
+[node name="Line2D2" type="Line2D" parent="Camera2D/Drawings/Line2D2"]
+points = PackedVector2Array(50, 150, 50, -150)
+width = 5.0
+default_color = Color(1, 1, 1, 0.117647)
+
+[node name="Line2D3" type="Line2D" parent="Camera2D/Drawings/Line2D2"]
+points = PackedVector2Array(100, 150, 100, -150)
+width = 5.0
+default_color = Color(1, 1, 1, 0.117647)
+
+[node name="Line2D4" type="Line2D" parent="Camera2D/Drawings/Line2D2"]
+points = PackedVector2Array(-50, 150, -50, -150)
+width = 5.0
+default_color = Color(1, 1, 1, 0.117647)
+
+[node name="Line2D5" type="Line2D" parent="Camera2D/Drawings/Line2D2"]
+points = PackedVector2Array(-100, 150, -100, -150)
+width = 5.0
+default_color = Color(1, 1, 1, 0.117647)
+
+[node name="LineArea" type="Area2D" parent="Camera2D"]
+monitorable = false
+
+[node name="Line2D" type="Line2D" parent="Camera2D/LineArea"]
+points = PackedVector2Array(0, 0, 114, 114)
+width = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/LineArea"]
+position = Vector2(61.4999, 60.4999)
+rotation = -0.785398
+shape = SubResource("RectangleShape2D_hn2ci")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(250, 250)
+
+[connection signal="area_entered" from="Camera2D/LineArea" to="." method="_on_line_area_area_entered"]

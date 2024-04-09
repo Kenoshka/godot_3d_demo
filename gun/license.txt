@@ -1,0 +1,11 @@
+Model Information:
+* title:	Gravity Gun
+* source:	https://sketchfab.com/3d-models/gravity-gun-3b71195691b94c018ddd9a7cd5aa546e
+* author:	Pete_YT (https://sketchfab.com/Pete_YT)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Gravity Gun" (https://sketchfab.com/3d-models/gravity-gun-3b71195691b94c018ddd9a7cd5aa546e) by Pete_YT (https://sketchfab.com/Pete_YT) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

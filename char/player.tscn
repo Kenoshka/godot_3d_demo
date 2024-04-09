@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=3 uid="uid://ce7psunv167c7"]
+
+[ext_resource type="Script" path="res://char/CharacterBody3D.gd" id="1_v41cb"]
+[ext_resource type="PackedScene" uid="uid://cxr8yf75yn3jf" path="res://gun/gun.tscn" id="2_y5k64"]
+[ext_resource type="PackedScene" uid="uid://ckyt2saqkkonp" path="res://device/device.tscn" id="3_t4hsd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mu6nt"]
+size = Vector3(15, 1, 15)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kuog2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_63eb1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o5a21"]
+size = Vector3(0.601995, 0.377783, 0.48638)
+
+[sub_resource type="LabelSettings" id="LabelSettings_d0dk7"]
+font_size = 20
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2dk5e"]
+viewport_path = NodePath("SubViewport")
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+floor_snap_length = 0.5
+script = ExtResource("1_v41cb")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_mu6nt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_kuog2")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+mesh = SubResource("CapsuleMesh_63eb1")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07227, -0.339395)
+current = true
+
+[node name="Marker3D" type="Marker3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.48911)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Camera/Marker3D"]
+visible = false
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Area3D" type="Area3D" parent="Camera/Marker3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/Marker3D/Area3D"]
+shape = SubResource("BoxShape3D_o5a21")
+
+[node name="scene" parent="Camera" instance=ExtResource("2_y5k64")]
+transform = Transform3D(0.032756, 0.00512945, -0.99945, -0.15471, 0.98796, 0, 0.987417, 0.154625, 0.0331552, 0.432, -0.52827, -0.247605)
+
+[node name="Device" parent="Camera" instance=ExtResource("3_t4hsd")]
+transform = Transform3D(0.894221, 0.355055, 0.272589, 0.00349045, 0.603417, -0.797418, -0.447613, 0.714019, 0.538349, -0.592, -0.295, -0.785)
+
+[node name="Control" type="Control" parent="Camera"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Keys" type="Label" parent="Camera/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.13125
+anchor_bottom = 0.333333
+offset_right = -90.0
+text = "R - Rewind
+G - Grenade
+M - Top-down camera"
+label_settings = SubResource("LabelSettings_d0dk7")
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Map" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(800, 450)
+texture = SubResource("ViewportTexture_2dk5e")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1600, 900)
+
+[node name="MapCamera" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 17.8563, 0)
+projection = 1
+size = 30.0
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

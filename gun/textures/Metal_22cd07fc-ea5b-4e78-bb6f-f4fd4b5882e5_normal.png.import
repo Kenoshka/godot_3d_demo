@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bxqhkmhy4b16r"
+path.s3tc="res://.godot/imported/Metal_22cd07fc-ea5b-4e78-bb6f-f4fd4b5882e5_normal.png-44cc7db259633c9f0429a0e213631e12.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://gun/textures/Metal_22cd07fc-ea5b-4e78-bb6f-f4fd4b5882e5_normal.png"
+dest_files=["res://.godot/imported/Metal_22cd07fc-ea5b-4e78-bb6f-f4fd4b5882e5_normal.png-44cc7db259633c9f0429a0e213631e12.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://gun/textures/Metal_22cd07fc-ea5b-4e78-bb6f-f4fd4b5882e5_normal.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

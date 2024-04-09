@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyyggg26gk6bx"]
+
+[ext_resource type="Script" path="res://BackwardObject.gd" id="1_rkqbp"]
+[ext_resource type="PackedScene" uid="uid://b6umxcbh7mm3b" path="res://stool/scene.gltf" id="2_0xmpt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kidwv"]
+size = Vector3(0.699621, 0.745566, 0.682521)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iscip"]
+size = Vector3(0.754044, 0.8968, 0.0952237)
+
+[node name="Backward_Item" type="RigidBody3D"]
+script = ExtResource("1_rkqbp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.387022, -0.0173459)
+shape = SubResource("BoxShape3D_kidwv")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.447512, 0.38426)
+shape = SubResource("BoxShape3D_iscip")
+
+[node name="scene" parent="." instance=ExtResource("2_0xmpt")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.860318, 0.38426)

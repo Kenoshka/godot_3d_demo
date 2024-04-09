@@ -1,0 +1,154 @@
+[gd_scene load_steps=11 format=3 uid="uid://sb6m2umdlcbt"]
+
+[ext_resource type="Script" path="res://car/Car.gd" id="1_5pu66"]
+[ext_resource type="PackedScene" uid="uid://chtxnww73qhb0" path="res://car/car_mesh.tscn" id="2_s0xro"]
+[ext_resource type="PackedScene" uid="uid://bqn8evptqmdae" path="res://car/wheel_mesh.tscn" id="3_4wp0u"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lu80n"]
+friction = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gy1ty"]
+size = Vector3(2, 1.8, 2.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_42swk"]
+size = Vector3(2, 0.313, 3.344)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ktixd"]
+height = 0.5
+radius = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4iqwx"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_lktto"]
+material = SubResource("StandardMaterial3D_4iqwx")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Gradient" id="Gradient_gbv7u"]
+offsets = PackedFloat32Array(0.222222, 0.391534, 0.640212)
+colors = PackedColorArray(1, 0.975, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1)
+
+[node name="Car" type="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.841063, 0.102686)
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_lu80n")
+gravity_scale = 1.5
+center_of_mass_mode = 1
+script = ExtResource("1_5pu66")
+
+[node name="scene" parent="." instance=ExtResource("2_s0xro")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.866532, -1.15366)
+shape = SubResource("BoxShape3D_gy1ty")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.999985, -0.00199428, -0.00513144, 0.000233835, 0.946627, -0.322331, 0.00550038, 0.322325, 0.946613, 0, 1.00762, 1.49347)
+shape = SubResource("BoxShape3D_42swk")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.168518, 1.49347)
+shape = SubResource("BoxShape3D_42swk")
+
+[node name="UP_LEFT" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.368, 1.237)
+use_as_steering = true
+wheel_radius = 0.6
+wheel_friction_slip = 8.0
+suspension_stiffness = 25.0
+
+[node name="Part_000" parent="UP_LEFT" instance=ExtResource("3_4wp0u")]
+transform = Transform3D(0, 0, -0.058, -0.058, 0, 0, 0, 0.058, 0, 0, 0, 0)
+
+[node name="UP_RIGHT" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.368, 1.237)
+use_as_steering = true
+wheel_radius = 0.6
+wheel_friction_slip = 8.0
+suspension_stiffness = 25.0
+
+[node name="Part_000" parent="UP_RIGHT" instance=ExtResource("3_4wp0u")]
+transform = Transform3D(0, 0, -0.058, -0.058, 0, 0, 0, 0.058, 0, 0, 0, 0)
+
+[node name="DOWN_LEFT" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.368, -1.97624)
+use_as_traction = true
+wheel_radius = 0.6
+wheel_friction_slip = 8.0
+suspension_stiffness = 25.0
+
+[node name="Part_000" parent="DOWN_LEFT" instance=ExtResource("3_4wp0u")]
+transform = Transform3D(0, 0, -0.058, -0.058, 0, 0, 0, 0.058, 0, 0, 0, 0)
+
+[node name="DOWN_RIGHT" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.368, -1.976)
+use_as_traction = true
+wheel_radius = 0.6
+wheel_friction_slip = 8.0
+suspension_stiffness = 25.0
+
+[node name="Part_000" parent="DOWN_RIGHT" instance=ExtResource("3_4wp0u")]
+transform = Transform3D(0, 0, -0.058, -0.058, 0, 0, 0, 0.058, 0, 0, 0, 0)
+
+[node name="wheelCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.5, 0.368, 1.237)
+shape = SubResource("CylinderShape3D_ktixd")
+
+[node name="wheelCollider2" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.5, 0.368, 1.237)
+shape = SubResource("CylinderShape3D_ktixd")
+
+[node name="wheelCollider3" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.5, 0.368, -1.97624)
+shape = SubResource("CylinderShape3D_ktixd")
+
+[node name="wheelCollider4" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.5, 0.368, -1.976)
+shape = SubResource("CylinderShape3D_ktixd")
+
+[node name="Thruster" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.730809, 1.35063, -2.96643)
+emitting = false
+amount = 100
+speed_scale = 3.0
+mesh = SubResource("BoxMesh_lktto")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 0.3
+emission_ring_inner_radius = 0.0
+spread = 21.59
+gravity = Vector3(0, 0, -9.8)
+color_ramp = SubResource("Gradient_gbv7u")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Thruster"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0390677, 0.0966837, -0.228386)
+light_color = Color(1, 0, 0, 1)
+light_energy = 15.439
+light_size = 0.1
+omni_range = 0.881
+
+[node name="Thruster2" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.809811, 1.35063, -2.96643)
+emitting = false
+amount = 100
+speed_scale = 3.0
+mesh = SubResource("BoxMesh_lktto")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 0.3
+emission_ring_inner_radius = 0.0
+spread = 21.59
+gravity = Vector3(0, 0, -9.8)
+color_ramp = SubResource("Gradient_gbv7u")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Thruster2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0390677, 0.0966837, -0.228386)
+light_color = Color(1, 0, 0, 1)
+light_energy = 15.439
+light_size = 0.1
+omni_range = 0.881
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 1.77636e-15, -8.74228e-08, -1.69341e-08, 0.98106, 0.193704, 8.5767e-08, 0.193704, -0.98106, 0, 4.0108, -6.11924)

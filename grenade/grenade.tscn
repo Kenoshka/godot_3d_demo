@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://c85en3etcg6ph"]
+
+[ext_resource type="Texture2D" uid="uid://beav7ndgubuq5" path="res://icon.svg" id="1_bxl6k"]
+[ext_resource type="Script" path="res://grenade/grenade.gd" id="1_ea60k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ch1b2"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.207843, 0.6, 0, 1)
+albedo_texture = ExtResource("1_bxl6k")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_36vjn"]
+radius = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cebs1"]
+radius = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tny0h"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.435294, 0, 0.00392157, 0.541176)
+
+[node name="grenade" type="RigidBody3D"]
+mass = 3.0
+script = ExtResource("1_ea60k")
+
+[node name="Model" type="CSGSphere3D" parent="."]
+radius = 0.25
+radial_segments = 4
+rings = 4
+material = SubResource("StandardMaterial3D_ch1b2")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_36vjn")
+
+[node name="ExplosionArea" type="Area3D" parent="."]
+
+[node name="Collision" type="CollisionShape3D" parent="ExplosionArea"]
+shape = SubResource("SphereShape3D_cebs1")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="FreeTimer" type="Timer" parent="."]
+
+[node name="Expolsion" type="CSGSphere3D" parent="."]
+visible = false
+radius = 3.0
+radial_segments = 32
+rings = 32
+material = SubResource("StandardMaterial3D_tny0h")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="FreeTimer" to="." method="_on_free_timer_timeout"]

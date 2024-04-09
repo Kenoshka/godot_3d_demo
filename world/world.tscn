@@ -1,0 +1,77 @@
+[gd_scene load_steps=13 format=3 uid="uid://ojrtwq8vjc24"]
+
+[ext_resource type="Texture2D" uid="uid://beav7ndgubuq5" path="res://icon.svg" id="1_j6c2r"]
+[ext_resource type="Script" path="res://world/world.gd" id="1_rct13"]
+[ext_resource type="Texture2D" uid="uid://bvwo027jmwhvu" path="res://Background_baseColor.jpeg" id="2_clfak"]
+[ext_resource type="PackedScene" uid="uid://bst56poqxc4qm" path="res://world/cube.tscn" id="4_3tkqs"]
+[ext_resource type="PackedScene" uid="uid://bo1qhk6dfkcx5" path="res://stool/stool.tscn" id="6_pey4m"]
+[ext_resource type="PackedScene" uid="uid://ce7psunv167c7" path="res://char/player.tscn" id="6_tdqud"]
+[ext_resource type="PackedScene" uid="uid://sb6m2umdlcbt" path="res://car/Car.tscn" id="264_rfxi6"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1w8vo"]
+panorama = ExtResource("2_clfak")
+
+[sub_resource type="Sky" id="Sky_nxe0t"]
+sky_material = SubResource("PanoramaSkyMaterial_1w8vo")
+
+[sub_resource type="Environment" id="Environment_t0g87"]
+background_mode = 2
+sky = SubResource("Sky_nxe0t")
+sky_rotation = Vector3(3.14159, 0, 0)
+tonemap_mode = 2
+ssr_max_steps = 124
+glow_enabled = true
+glow_strength = 0.75
+glow_blend_mode = 0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+adjustment_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_2dgr0"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uu2sy"]
+albedo_texture = ExtResource("1_j6c2r")
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_rct13")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t0g87")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldMesh" type="CSGMesh3D" parent="."]
+use_collision = true
+mesh = SubResource("BoxMesh_2dgr0")
+material = SubResource("StandardMaterial3D_uu2sy")
+
+[node name="SUB" type="CSGCombiner3D" parent="WorldMesh"]
+operation = 2
+
+[node name="Timer" type="Timer" parent="WorldMesh"]
+one_shot = true
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("6_tdqud")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8672, 10.1551, -14.6457)
+
+[node name="Car" parent="." instance=ExtResource("264_rfxi6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5784, 2.27155, -11.808)
+
+[node name="Objects" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.54349, 1.32092, -3.29288)
+
+[node name="stool" parent="Objects" instance=ExtResource("6_pey4m")]
+
+[node name="stool2" parent="Objects" instance=ExtResource("6_pey4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.65864, 0, 0)
+
+[node name="stool3" parent="Objects" instance=ExtResource("6_pey4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34999, 0, 0)
+
+[node name="Cube" parent="Objects" instance=ExtResource("4_3tkqs")]
+
+[connection signal="child_entered_tree" from="WorldMesh/SUB" to="." method="_on_sub_child_entered_tree"]
+[connection signal="timeout" from="WorldMesh/Timer" to="." method="_on_timer_timeout"]

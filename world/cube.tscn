@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bst56poqxc4qm"]
+
+[ext_resource type="Script" path="res://BackwardObject.gd" id="1_y8mt0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_meccu"]
+
+[node name="Cube" type="RigidBody3D"]
+script = ExtResource("1_y8mt0")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_meccu")
